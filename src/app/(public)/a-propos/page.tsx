@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView, animate } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -24,6 +24,18 @@ const fadeUp = (delay = 0) => ({
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (inView) {
+      const controls = animate(0, target, {
+        duration: 1.8,
+        ease: "easeOut",
+        onUpdate: (value) => setDisplayValue(Math.round(value)),
+      });
+      return () => controls.stop();
+    }
+  }, [inView, target]);
 
   return (
     <motion.span
@@ -33,17 +45,7 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
       className="font-sans font-bold text-accent"
       style={{ fontSize: "clamp(36px, 4vw, 52px)" }}
     >
-      <motion.span
-        initial={{ innerText: 0 } as React.CSSProperties & { innerText: number }}
-        animate={inView ? { innerText: target } : {}}
-        transition={{ duration: 1.8, ease: "easeOut" }}
-        onUpdate={(latest) => {
-          if (ref.current) {
-            const val = Math.round((latest as { innerText: number }).innerText ?? 0);
-            ref.current.textContent = val.toLocaleString("fr-FR") + suffix;
-          }
-        }}
-      />
+      {displayValue.toLocaleString("fr-FR")}{suffix}
     </motion.span>
   );
 }
