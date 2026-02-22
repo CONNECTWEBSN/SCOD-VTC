@@ -93,8 +93,8 @@ export function HowItWorks({ className }: { className?: string }) {
             >
               {/* Big ghost number */}
               <span
-                className="pointer-events-none absolute right-5 top-3 select-none leading-none text-grey-100 transition-colors duration-300 group-hover:text-white/5"
-                style={{ fontSize: "clamp(72px, 8vw, 96px)", fontWeight: "var(--weight-bold)", letterSpacing: "-0.03em" }}
+                className="pointer-events-none absolute right-5 top-3 select-none font-display font-extrabold leading-none tracking-[-0.03em] text-grey-100 transition-colors duration-300 group-hover:text-white/5"
+                style={{ fontSize: "clamp(72px, 8vw, 96px)" }}
                 aria-hidden
               >
                 {step.number}
@@ -102,18 +102,18 @@ export function HowItWorks({ className }: { className?: string }) {
 
               {/* Step number pill */}
               <div className="relative mb-6">
-                <span className="text-label inline-block rounded-full bg-accent/10 px-3 py-1 text-accent transition-colors duration-300 group-hover:bg-white/10 group-hover:text-accent">
+                <span className="inline-block rounded-full bg-accent/10 px-3 py-1 font-body text-[10px] font-bold uppercase tracking-[0.08em] text-accent transition-colors duration-300 group-hover:bg-white/10 group-hover:text-accent">
                   Étape {parseInt(step.number)}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="text-h3 relative mb-3 transition-colors duration-300 group-hover:text-white">
+              <h3 className="relative mb-3 font-body text-[18px] font-bold leading-snug tracking-[-0.01em] text-grey-900 transition-colors duration-300 group-hover:text-white">
                 {step.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm relative transition-colors duration-300 group-hover:text-white/65 text-justify">
+              <p className="relative font-body text-[14px] font-normal leading-relaxed text-grey-500 transition-colors duration-300 group-hover:text-white/65 text-justify">
                 {step.description}
               </p>
             </motion.div>
